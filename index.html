@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milites Maiorcarum - Guardies Capdepera</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Apply Inter font globally */
+
+        html, body {
+    height: 100%;
+    margin: 0;
+}
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: black;
+    background-image: url("images/image_bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Optional: for parallax-style effect */
+
+    min-height: 100%;
+}
+        /* Custom styles for the 'active' button state */
+        .apuntarme-button.active {
+            background-color: #10B981; /* Tailwind green-600 */
+            color: white;
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.1); /* Inset shadow for pressed effect */
+        }
+        .apuntarme-button.active:hover {
+            background-color: #059669; /* Tailwind green-700 */
+        }
+        /* Ensure table cells have minimum height and vertical alignment */
+        .calendar-table td {
+            min-height: 100px; /* Adjust as needed */
+            vertical-align: top;
+            padding: 1rem; /* p-4 */
+        }
+        /* Style for the participant list */
+        .participant-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 0.75rem; /* mb-3 */
+            font-size: 0.875rem; /* text-sm */
+            color: #4B5563; /* text-gray-600 */
+            min-height: 40px; /* Ensure some space even if empty */
+        }
+        .participant-list li {
+            margin-bottom: 0.25rem; /* mb-1 */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-4 md:p-8">
+
+    <div class="w-[90%]  mx-auto bg-white p-6 md:p-8 rounded-lg shadow-md">
+
+
+        <h1 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-6 md:mb-8">
+            Milites Maiorcarum - Guardies Capdepera
+        </h1>
+
+        <div class="mb-4">
+            <label for="miembro" class="block text-sm font-medium text-gray-700">Miembro:</label>
+            <input type="text" id="miembro" name="miembro" placeholder="Tu nombre" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+        
+
+        <div class="overflow-x-auto">
+
+            <div class="flex">
+            <!-- Left labels -->
+            <div class="flex flex-col justify-between py-2 mr-2 text-sm font-medium text-gray-700">
+              <div class="h-1/2 flex items-center">Mañana</div>
+              <div class="h-1/2 flex items-center">Tarde</div>
+            </div>
+
+            <table class="min-w-full border border-gray-300 divide-y divide-gray-300 calendar-table mb-8">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-r border-gray-300">
+                            Carga Furgoneta (18h)
+                        </th>
+                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-r border-gray-300">
+                            Montaje Campamento
+                        </th>
+                        <th scope="col" colspan="3" class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Guardias Campamento
+                        </th>
+                    </tr>
+                    <tr>
+                        <th scope="col" class="w-24  px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-r border-t border-gray-300">
+                            Miércoles
+                        </th>
+                        <th scope="col" class="w-24 px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-r border-t border-gray-300">
+                            Jueves
+                        </th>
+                        <th scope="col" class="w-24 px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-r border-t border-gray-300">
+                            Viernes
+                        </th>
+                        <th scope="col" class="w-24 px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-r border-t border-gray-300">
+                            Sábado
+                        </th>
+                        <th scope="col" class="w-24 px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-t border-gray-300">
+                            Domingo
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <tr>
+                        <td class="border-r border-gray-300 bg-gray-50">
+                            </td>
+                        <td class="border-r border-gray-300">
+                            <ul class="participant-list" id="list-jueves-0">
+                                </ul>
+                            <button class="apuntarme-button w-full mt-auto px-3 py-1.5 text-sm font-medium text-white bg-blue-600 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" aria-pressed="false">
+                                Apuntarme
+                            </button>
+                        </td>
+                        <td class="border-r border-gray-300">
+                            <ul class="participant-list" id="list-viernes-0">
+                                </ul>
+                            <button class="apuntarme-button w-full mt-auto px-3 py-1.5 text-sm font-medium text-white bg-blue-600 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" aria-pressed="false">
+                                Apuntarme
+                            </button>
+                        </td>
+                        <td class="border-r border-gray-300">
+                            <ul class="participant-list" id="list-sabado-0">
+                                </ul>
+                            <button class="apuntarme-button w-full mt-auto px-3 py-1.5 text-sm font-medium text-white bg-blue-600 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" aria-pressed="false">
+                                Apuntarme
+                            </button>
+                        </td>
+                        <td>
+                            <ul class="participant-list" id="list-domingo-0">
+                                </ul>
+                            <button class="apuntarme-button w-full mt-auto px-3 py-1.5 text-sm font-medium text-white bg-blue-600 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" aria-pressed="false">
+                                Apuntarme
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border-r border-gray-300">
+                            <ul class="participant-list" id="list-miercoles-0">
+                                 </ul>
+                            <button class="apuntarme-button w-full mt-auto px-3 py-1.5 text-sm font-medium text-white bg-blue-600 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" aria-pressed="false">
+                                Apuntarme
+                            </button>
+                        </td>
+                        <td class="border-r border-gray-300">
+                            <ul class="participant-list" id="list-jueves-1">
+                                 </ul>
+                            <button class="apuntarme-button w-full mt-auto px-3 py-1.5 text-sm font-medium text-white bg-blue-600 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" aria-pressed="false">
+                                Apuntarme
+                            </button>
+                        </td>
+                        <td class="border-r border-gray-300">
+                            <ul class="participant-list" id="list-viernes-1">
+                                 </ul>
+                            <button class="apuntarme-button w-full mt-auto px-3 py-1.5 text-sm font-medium text-white bg-blue-600 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" aria-pressed="false">
+                                Apuntarme
+                            </button>
+                        </td>
+                        <td class="border-r border-gray-300">
+                            <ul class="participant-list" id="list-sabado-1">
+                                 </ul>
+                            <button class="apuntarme-button w-full mt-auto px-3 py-1.5 text-sm font-medium text-white bg-blue-600 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" aria-pressed="false">
+                                Apuntarme
+                            </button>
+                        </td>
+                        <td>
+                            <ul class="participant-list" id="list-domingo-1">
+                                 </ul>
+                            <button class="apuntarme-button w-full mt-auto px-3 py-1.5 text-sm font-medium text-white bg-blue-600 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" aria-pressed="false">
+                                Apuntarme
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+            </table>
+
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button id="submit-button" type="submit" class="px-6 py-2 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Enviar Cambios
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+
+
+
+        const SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwwz-zdi9H8N9eMPZ638HBc01x-xI-Khc9IcccfeU9ZUoBk7zl8ZlebsQQjS06h_uTs/exec"
+        const sheetId = "1RIG3GjHY31pjpTebrlcH7DtZIC-NBo4l03Bl8IAUCYg";
+
+
+
+        function parseCSV(csv) {
+            const rows = [];
+            let row = [], value = '';
+            let insideQuote = false;
+        
+            for (let i = 0; i < csv.length; i++) {
+            const char = csv[i];
+            const nextChar = csv[i + 1];
+        
+            if (char === '"') {
+                if (insideQuote && nextChar === '"') {
+                value += '"'; // Escaped quote
+                i++;
+                } else {
+                insideQuote = !insideQuote;
+                }
+            } else if (char === ',' && !insideQuote) {
+                row.push(value.trim());
+                value = '';
+            } else if ((char === '\n' || char === '\r') && !insideQuote) {
+                if (value || value === '') row.push(value.trim());
+                if (row.length > 0) rows.push(row);
+                row = [];
+                value = '';
+                if (char === '\r' && nextChar === '\n') i++; // Handle \r\n
+            } else {
+                value += char;
+            }
+            }
+        
+            if (value) row.push(value.trim());
+            if (row.length > 0) rows.push(row);
+        
+            return rows;
+        }
+        
+        
+
+        async function readStructuredGoogleSheet(sheetId, gid = 0) {
+            const url = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}`;
+        
+            try {
+            const response = await fetch(url);
+            const csvText = await response.text();
+            const rows = parseCSV(csvText);
+        
+            const headers = rows[0].map(h => h.toLowerCase());
+            const result = {};
+        
+            for (let col = 0; col < headers.length; col++) {
+                const values = [];
+                for (let row = 1; row < rows.length; row++) {
+                const cell = rows[row][col];
+                if (cell) {
+                    const names = cell.split(',').map(n => n.trim()).filter(Boolean);
+                    if (names.length > 0) values.push(names[0]); // Take first name
+                }
+                }
+                result[headers[col]] = values;
+            }
+        
+            return result;
+            } catch (err) {
+            console.error("Error fetching or parsing Google Sheet:", err);
+            return null;
+            }
+        }
+        
+
+
+
+        /**
+         * Updates the participant lists in the calendar table based on provided JSON data.
+         * @param {object} data - The JSON object containing calendar data.
+         * Example format:
+         * {
+         * miercoles: [ 'Names1\nNames2', 'Names3' ],
+         * jueves: [ 'Names4', 'Names5\nNames6' ],
+         * // ... and so on for other days
+         * }
+         */
+         function updateCalendarData(data) {
+            for (const day in data) {
+                if (data.hasOwnProperty(day)) {
+                    let namesPerTask = data[day]; // Array of name strings for this day
+
+                    // Special handling for miércoles
+                    if (day === 'miercoles') {
+                        // Force namesPerTask to be a single-item array using the second element only
+                        namesPerTask = [namesPerTask[1]];
+                    }
+
+                    namesPerTask.forEach((namesString, index) => {
+                        const listId = `list-${day}-${index}`;
+                        const listElement = document.getElementById(listId);
+
+                        if (listElement) {
+                            listElement.innerHTML = '';
+
+                            const names = namesString.split('\n').filter(name => name.trim() !== '');
+                            names.forEach(name => {
+                                const listItem = document.createElement('li');
+                                listItem.textContent = name.trim();
+                                listElement.appendChild(listItem);
+                            });
+                        } else {
+                            console.warn(`List element with ID "${listId}" not found.`);
+                        }
+                    });
+                }
+            }
+        }
+
+
+        // --- Button Interaction Logic ---
+        const buttons = document.querySelectorAll('.apuntarme-button');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                button.classList.toggle('active');
+                const isPressed = button.getAttribute('aria-pressed') === 'true';
+                button.setAttribute('aria-pressed', !isPressed);
+            });
+        });
+
+        // --- Submit Logic (Placeholder) ---
+        const submitButton = document.querySelector('button[type="submit"]');
+        submitButton.addEventListener('click', (event) => {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Enviando...';
+
+
+            event.preventDefault();
+
+            const days = ['miercoles', 'jueves', 'viernes', 'sabado', 'domingo'];
+            const result = {};
+
+            days.forEach(day => {
+                // For miercoles, only Tarde exists (index 0 in HTML, but it's the 2nd row)
+                if (day === 'miercoles') {
+                    const btn = document.querySelector(`#list-${day}-0`)?.nextElementSibling;
+                    const isActive = btn?.classList.contains('active');
+                    result[day] = [false, isActive || false]; // always [false, true/false]
+                } else {
+                    const btnManana = document.querySelector(`#list-${day}-0`)?.nextElementSibling;
+                    const btnTarde = document.querySelector(`#list-${day}-1`)?.nextElementSibling;
+                    result[day] = [
+                        btnManana?.classList.contains('active') || false,
+                        btnTarde?.classList.contains('active') || false
+                    ];
+                }
+            });
+
+
+            result["miembro"] = document.getElementById("miembro").value;
+            console.log(JSON.stringify(result));
+            fetch(SHEETS_WEB_APP_URL, {
+                method: 'POST',
+                mode: "no-cors",
+                body: JSON.stringify(result),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(() => {
+                submitButton.textContent = '¡Enviado!';
+            })
+            .catch(() => {
+                submitButton.textContent = 'Error al enviar';
+            })
+            .finally(() => {
+                setTimeout(() => {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Enviar Cambios';
+                    submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                    readStructuredGoogleSheet(sheetId).then(data => {
+                        console.log(data);
+                        updateCalendarData(data);
+                    });
+                }, 3000);
+            });
+
+
+            
+        });
+
+
+
+        // Wait for the DOM to be fully loaded before updating the table
+        document.addEventListener('DOMContentLoaded', () => {
+            readStructuredGoogleSheet(sheetId).then(data => {
+                console.log(data);
+                updateCalendarData(data);
+            });
+
+            
+        });
+
+    </script>
+
+</body>
+</html>
+
+
