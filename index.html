@@ -66,11 +66,20 @@ body {
             Milites Maiorcarum - Guardies Capdepera
           </h1>
           
+          <p class="text-sm text-gray-700 mb-4">
+            <strong>HORARIOS DE MAÑANA:</strong> Desde la hora de apertura hasta la de comer.<br>
+            <strong>HORARIOS DE TARDE:</strong> Después de comer hasta el cierre para recoger.<br>
+            <strong>*Ratio:</strong> 3 guardias por persona en las franjas de mañana o tarde.<br>
+            <strong>*La participación en carga, montaje e intendencia de víveres cuenta como guardia.</strong> Para los desfiles y espectáculos deberíamos estar todos.<br>
+            <strong>*Tal como acordamos copias de la lista estarán expuestas en el campamento.</strong>
+          </p>
+
 
         <div class="mb-4">
             <label for="miembro" class="block text-sm font-medium text-gray-700">Miembro:</label>
             <input type="text" id="miembro" name="miembro" placeholder="Tu nombre" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         </div>
+        
         
 
         <div class="overflow-x-auto">
@@ -81,6 +90,8 @@ body {
               <div class="h-1/2 flex items-center">Mañana</div>
               <div class="h-1/2 flex items-center">Tarde</div>
             </div>
+
+            
 
             <table class="min-w-full border border-gray-300 divide-y divide-gray-300 calendar-table mb-8">
                 <thead class="bg-gray-50">
@@ -264,6 +275,7 @@ body {
                     if (names.length > 0) values.push(names[0]); // Take first name
                 }
                 }
+
                 result[headers[col]] = values;
             }
         
@@ -291,7 +303,6 @@ body {
             for (const day in data) {
                 if (data.hasOwnProperty(day)) {
                     let namesPerTask = data[day]; // Array of name strings for this day
-
                     // Special handling for miércoles
                     if (day === 'miercoles') {
                         // Force namesPerTask to be a single-item array using the second element only
