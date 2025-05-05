@@ -256,35 +256,32 @@ body {
         
 
         async function readStructuredGoogleSheet(sheetId, gid = 0) {
-            const url = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}`;
-        
-            try {
-            const response = await fetch(url);
-            const csvText = await response.text();
-            const rows = parseCSV(csvText);
-        
-            const headers = rows[0].map(h => h.toLowerCase());
-            const result = {};
-        
-            for (let col = 0; col < headers.length; col++) {
-                const values = [];
-                for (let row = 1; row < rows.length; row++) {
-                const cell = rows[row][col];
-                if (cell) {
-                    const names = cell.split(',').map(n => n.trim()).filter(Boolean);
-                    if (names.length > 0) values.push(names[0]); // Take first name
-                }
-                }
+    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}`;
 
-                result[headers[col]] = values;
+    try {
+        const response = await fetch(url);
+        const csvText = await response.text();
+        const rows = parseCSV(csvText);
+
+        const headers = rows[0].map(h => h.toLowerCase());
+        const result = {};
+
+        for (let col = 0; col < headers.length; col++) {
+            const values = [];
+            for (let row = 1; row < rows.length; row++) {
+                const cell = rows[row][col] || '';
+                const names = cell.split(',').map(n => n.trim()).filter(Boolean);
+                values.push(names[0] || ''); // Take first name or empty string
             }
-        
-            return result;
-            } catch (err) {
-            console.error("Error fetching or parsing Google Sheet:", err);
-            return null;
-            }
+            result[headers[col]] = values;
         }
+
+        return result;
+    } catch (err) {
+        console.error("Error fetching or parsing Google Sheet:", err);
+        return null;
+    }
+}
         
 
 
@@ -310,6 +307,7 @@ body {
                     }
 
                     namesPerTask.forEach((namesString, index) => {
+
                         const listId = `list-${day}-${index}`;
                         const listElement = document.getElementById(listId);
 
